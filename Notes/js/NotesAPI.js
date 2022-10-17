@@ -6,7 +6,7 @@ export default class NotesAPI {
 
     // Sort by creating data
     return notes.sort((a, b) => {
-      return new Date(a.updated) > new Data(b.updated) ? -1 : 1;
+      return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
     });
   }
 
@@ -19,11 +19,11 @@ export default class NotesAPI {
     if (existing) {
       existing.title = noteToSeve.title;
       existing.body = noteToSeve.body;
-      existing.updated = new Data().toISOString();
+      existing.updated = new Date().toISOString();
     } else {
       // Assign unic id with method random, add current data
       noteToSeve.id = Math.floor(Math.random() * 1000000);
-      noteToSeve.updated = new Data().toISOString();
+      noteToSeve.updated = new Date().toISOString();
       notes.push(noteToSeve);
     }
 
