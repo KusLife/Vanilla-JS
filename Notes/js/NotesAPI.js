@@ -1,10 +1,10 @@
 export default class NotesAPI {
-  // Getting all notes
+  // Getting all notes from local storeage 
   static getAllNotes() {
     // Parsing localsoreage
     const notes = JSON.parse(localStorage.getItem('notesapp-notes') || '[]');
 
-    // Sort by creating data
+    // Sort algorytm, lining by a creating date
     return notes.sort((a, b) => {
       return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
     });

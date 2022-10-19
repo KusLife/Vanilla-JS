@@ -1,6 +1,7 @@
 import NotesView from './NotesView.js';
 import NotesAPI from './NotesAPI.js';
 
+// class component which band 'view' and 'API' 
 export default class App {
   constructor(root) {
     this.notes = [];
@@ -14,7 +15,6 @@ export default class App {
     const notes = NotesAPI.getAllNotes();
 
     this._setNotes(notes);
-    // here was title instead of 'lenght'
     if (notes.length > 0) {
       this._setActiveNote(notes[0]);
     }
