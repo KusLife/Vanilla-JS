@@ -1,1 +1,0 @@
-console.log('Static server is started...')
