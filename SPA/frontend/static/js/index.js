@@ -1,5 +1,6 @@
 import Deshboard from './views/Deshboard.js';
 import Posts from './views/Posts.js';
+import PostsView from './views/PostsView.js';
 import Settings from './views/Settings.js';
 
 
@@ -12,9 +13,8 @@ const getParams = match => {
     const values = match.result.slice(1)
     const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1])
 
-    console.log(Array.from(match.route.path.matchAll(/:(\w+)/g)))
-
-    return {}
+    return Object.fromEntries(keys.map((key, id) => {
+      return [key, values[id]]}))
 }
 
 // Get current url from the browser history
@@ -25,14 +25,10 @@ const navigateTo = (url) => {
 
 // A func provides logic in paths interactions
 const router = async () => {
-  // console.log('/posts/:id')
   const routes = [
     { path: '/', view: Deshboard },
     { path: '/posts', view: Posts},
-    
-    // Just for testing view in console
-    { path: '/posts/:id/:kus', view: Posts},
-
+    { path: '/posts/:id', view: PostsView},
     { path: '/settings', view: Settings},
   ];
 
@@ -40,24 +36,21 @@ const router = async () => {
   const potentialMatchs = routes.map((route) => {
     return {
       route: route,
-      // isMatch: location.pathname === route.path
       result: location.pathname.match(pathToRegex(route.path))
     };
   });
 
   // Make a boolin
-  // let match = potentialMatchs.find((matchElement) => matchElement.isMatch);
   let match = potentialMatchs.find((matchElement) => matchElement.result !== null);
 
   // In case we set a wrong url, we'll be redirected to the main page
   if (!match) {
     match = {
       route: routes[0],
-      isMatch: true,
+      result: [location.pathname]
     };
   }
 
-  // const view = new match.route.view()
   const view = new match.route.view(getParams(match))
 
   document.querySelector('#app').innerHTML = await view.getHTML()
