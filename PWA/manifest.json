@@ -1,0 +1,32 @@
+{
+  "name": "Ukraine PWA exemple",
+  "short_name": "Ukraine WPA",
+  "icons": [
+    {
+      "src": "images/ukraine_out.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/ukraine_in.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/ukraine_out.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/ukraine_in.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": ".",
+  "theme_color": "#c6bf5f",
+  "background_color": "#ffe4c4",
+  "display": "standalone"
+}
