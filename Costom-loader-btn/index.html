@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File uploader</title>
+    <style>
+        .file-upload {
+            display: inline-flex;
+            align-items: center;
+            font-size: 16px;
+        }
+        .file-upload__input {
+            display: none;
+        }
+        .file-upload__button {
+            /* to remove default settings 
+            -webkit-appearance: none; */
+            background: rgb(148, 220, 244);
+            border: 2px solid rgb(85, 195, 232);
+            border-radius: 4px;
+            outline: none;
+            padding: 0.5em 0.8em;
+            margin-right: 1em;
+            color: rgb(62, 58, 33);
+            font-size: 1em;
+            font-weight: bold;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+        .file-upload__button:active {
+          background: rgb(85, 195, 232);
+        }
+        .file-upload__lable {
+          max-width: 250px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          font-size: 0.95em;
+          white-space: nowrap;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="file-upload">
+        <!-- multiple file-uploader, input area gonna be hidden -->
+        <h1>Costom file upload button, file list</h1>
+      <input class="file-upload__input" type="file" name="myFile[]" id="myFile" multiple/>
+      <button class="file-upload__button" type="button">Choose file(s)</button>
+      <lable class="file-upload__lable"></lable>
+    </div>
+
+    <script>
+      // Get elements into js
+      Array.prototype.forEach.call(document.querySelectorAll(".file-upload__button"), (button) => {
+        const hiddenInput = button.parentElement.querySelector(".file-upload__input")
+        const lable = button.parentElement.querySelector(".file-upload__lable")
+        const defaultTextLable = "No file(s) selected"
+        // Set default lable text and hover (title)
+        lable.textContent = defaultTextLable
+        lable.title = defaultTextLable
+        // Click the btn thrue js
+        button.addEventListener("click", () => {
+          hiddenInput.click()
+        })
+        // An listener for catching choosen files "varian suported by EX"
+        hiddenInput.addEventListener("change", () => {
+          const filenameList = Array.prototype.map.call(hiddenInput.files, (file) => {
+            return file.name
+          })
+          // To change appropriatly names of added files
+          lable.textContent = filenameList.join(", ") || defaultTextLable
+          lable.title = lable.textContent
+        })
+
+      } )
+    </script>
+  </body>
+</html>
